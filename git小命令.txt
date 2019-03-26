@@ -1,0 +1,47 @@
+﻿git update-index --assume-unchanged config/database.php    //本地屏蔽database.php文件。 (可以用于已经commit的文件) 远程仓库不受影响
+git update-index --no-assume-unchanged 上面的反命令
+
+
+git fetch --all
+git reset --hard origin/develop
+git pull
+第一个命令的意思是取回远程端所有修改，第二句的意思是将版本号置到develop这个版本上。当然如果你需要置的是你自己的私有版本 
+
+
+git rm --cached file_path
+git commit -m 'delete remote somefile'
+git push 
+删除文件git缓存 使得文件不受版本控制
+
+
+
+
+Git diff branch1 branch2 --stat   //显示出所有有差异的文件列表
+
+Git diff branch1 branch2 文件名(带路径)   //显示指定文件的详细差异
+
+Git diff branch1 branch2                   //显示出所有有差异的文件的详细差异
+
+
+
+版本回退
+git reset 版本id  比如我修改 a.txt文件 然后commit了。想要撤销commit  就用这个（a.txt的修改还在，只是没有被commit）
+git reset --hard 版本id  比如我修改 a.txt文件 然后commit了。想要退回修改a.txt之前 就用这个。执行这个之后 a.txt的修改不存在了
+
+建议在服务器上版本回退是用--hard,本地代码回撤不带hard
+
+
+
+thinkphp队列命令
+php think queue:work \
+--daemon            //是否循环执行，如果不加该参数，则该命令处理完下一个消息就退出
+--queue  helloJobQueue  //要处理的队列的名称
+--delay  0 \        //如果本次任务执行抛出异常且任务未被删除时，设置其下次执行前延迟多少秒,默认为0
+--force  \          //系统处于维护状态时是否仍然处理任务，并未找到相关说明
+--memory 128 \      //该进程允许使用的内存上限，以 M 为单位
+--sleep  3 \        //如果队列中无任务，则sleep多少秒后重新检查(work+daemon模式)或者退出(listen或非daemon模式)
+--tries  2          //如果任务已经超过尝试次数上限，则触发‘任务尝试次数超限’事件，默认为0
+
+
+
+
